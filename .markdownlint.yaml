@@ -1,0 +1,5 @@
+default: true
+# Prose and tables use editor soft wrapping rather than a fixed line width.
+MD013: false
+# Compact tables are easier to maintain in source control.
+MD060: false
