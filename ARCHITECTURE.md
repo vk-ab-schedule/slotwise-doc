@@ -110,7 +110,9 @@ flowchart BT
 | `POST /api/auth/login`, `POST /api/auth/logout`, `GET /api/auth/me` | Вход, выход, текущий пользователь | 01 |
 | `GET/POST/PATCH /api/admin/accounts` | Учётные записи, роли, пароли, отключение | 02, 03, 23 |
 | `POST /api/admin/import?dryRun=` | Импорт данных вуза: предпросмотр и применение | 04 |
-| `/api/admin/groups`, `/rooms`, … | Ручная правка данных вуза | 23 |
+| `POST /api/admin/demo-data` | Генерация и импорт синтетических данных по профилю и seed | 04 |
+| `GET /api/university/{catalog}`, `GET /api/university/{catalog}/{id}` | Чтение справочников для ADMIN и ORGANIZER: people, groups, rooms, disciplines, equipment, teachings, supervisions, timetable. Для отдельной записи supervisions используется пара `{studentId}/{supervisorId}` | 06, 23 |
+| `POST/PUT/DELETE /api/admin/{catalog}` | Создание, изменение и удаление данных вуза администратором. Для изменения и удаления идентификатор записи передаётся в пути | 23 |
 | `GET/POST/PUT /api/event-types` | Справочник типов событий | 07 |
 | `GET/POST/PATCH /api/sessions` | Сессии организатора | 05 |
 | `/api/sessions/{id}/participants`, `/commission-pool`, `/rooms`, `/events` | Подготовка сессии | 06, 08 |
@@ -118,9 +120,11 @@ flowchart BT
 | `GET/PUT /api/sessions/{id}/busy-intervals/me`, `POST .../me/submit` | Своя занятость | 09 |
 | `PUT /api/sessions/{id}/rules` | Веса мягких ограничений | 11 |
 | `POST /api/sessions/{id}/precheck` | Предпроверка | 11 |
+| `GET /api/solvers` | Доступные алгоритмы расчёта | 11 |
 | `POST /api/sessions/{id}/solve` | Запуск расчёта, возвращает задачу | 11 |
 | `GET /api/jobs/{id}`, `GET /api/jobs/{id}/events` | Статус и прогресс задачи; `/events` — SSE, спринт 3 | 11 |
 | `GET /api/variants/{id}` | Вариант: назначения, метрики, объяснения | 13 |
+| `GET /api/variants/{id}/assignments/{eventId}/candidates` | Допустимые пары «время начала и аудитория» при остальных фиксированных назначениях | 13 |
 | `PATCH /api/variants/{id}/assignments/{eventId}` | Ручная правка и фиксация | 14 |
 | `POST /api/variants/{id}/publish` | Публикация | 15 |
 | `GET /api/me/schedule` | Моё расписание | 17 |
