@@ -15,6 +15,7 @@ SlotWise — веб-сервис, который строит расписани
 | [DEVELOPMENT.md](DEVELOPMENT.md) | CI/CD, ветки, коммиты, PR, задачи, миграции, соглашения по коду | Всем |
 | [DECISIONS.md](DECISIONS.md) | Журнал принятых и предложенных решений | Всем |
 | [BLOCKS.md](BLOCKS.md) | Блоки задач и их владельцы | Всем |
+| [DESIGN_MOCKUPS.md](DESIGN_MOCKUPS.md) | Ссылка на Figma и описание макетов интерфейса | Фронтенду, команде и ревьюерам |
 | [CICD_ARCHITECTURE.png](CICD_ARCHITECTURE.png) | Схема CI/CD | Всем |
 
 ## Ссылки
