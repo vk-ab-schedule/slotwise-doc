@@ -9,13 +9,13 @@
 | [slotwise-doc](https://github.com/vk-ab-schedule/slotwise-doc) | Документация проекта — единственный источник правды ([D-01](DECISIONS.md#d-01)) | вся команда |
 | [slotwise-back](https://github.com/vk-ab-schedule/slotwise-back) | Бэкенд и солверы (Gradle multi-module) | бэкенд |
 | [slotwise-front](https://github.com/vk-ab-schedule/slotwise-front) | Фронтенд | фронтенд |
-| slotwise-infra (будет создан) | Ansible, Docker Compose стенда, общий CD | DevOps |
+| [slotwise-infra](https://github.com/vk-ab-schedule/slotwise-infra) | Ansible, Docker Compose стенда, общий CD | DevOps |
 
 Задачи ведутся в [трекере](https://github.com/orgs/vk-ab-schedule/projects/1).
 
 ## CI/CD
 
-Сейчас CI запускает тесты backend и Markdown-линтер документации. Деплоя пока нет; ниже описана целевая схема.
+Сейчас CI запускает тесты бэкенда, проверки фронтенда и Markdown-линтер документации. Деплоя пока нет, он появится вместе со стендом в спринте 3 ([D-17](DECISIONS.md#d-17)); ниже описана целевая схема.
 
 Схема: [CICD_ARCHITECTURE.png](CICD_ARCHITECTURE.png). Стек: GitHub Actions, GitHub Container Registry, Ansible, Docker Compose. Для фронтенда и бэкенда процессы CI независимы, деплой централизован в `slotwise-infra`.
 
@@ -68,6 +68,7 @@
 - **Блоки** из [BLOCKS.md](BLOCKS.md) заводятся как issues; крупный блок можно разбить на под-задачи.
 - **Статусы на доске:** New → Todo → In Progress → Review → Testing → Done. Review — открыт PR; Testing — смержено, проверяется на стенде; Done — проверено.
 - **PR ссылается на issue** строкой `Closes #N` в описании. GitHub закрывает issue автоматически только при мерже в `main`, а рабочие PR вливаются в `sprint/N`. Поэтому после мержа автор PR сам закрывает issue и переносит карточку на доске.
+- **Issue закрывается, когда смержена реализация.** PR, который меняет только контракт, issue не закрывает: иначе на доске задача выглядит готовой, а эндпоинт отвечает 501.
 
 ## Коммиты, ветки, PR
 
