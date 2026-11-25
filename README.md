@@ -23,7 +23,7 @@ SlotWise — веб-сервис, который строит расписани
 - Трекер задач: <https://github.com/orgs/vk-ab-schedule/projects/1>
 - Бэкенд: <https://github.com/vk-ab-schedule/slotwise-back>
 - Фронтенд: <https://github.com/vk-ab-schedule/slotwise-front>
-- Стенд: появится в спринте 2
+- Стенд: появится в спринте 3 ([D-17](DECISIONS.md#d-17))
 
 ## Команда
 
@@ -32,7 +32,7 @@ SlotWise — веб-сервис, который строит расписани
 | Миша | [@foliageh](https://github.com/foliageh) | Бэкенд: доменная модель, безопасность, расчёт и публикация |
 | Серафим | [@s-pentin](https://github.com/s-pentin) | Бэкенд: хранение, импорт, контракт API, профилирование |
 | Андрей | [@Android12349](https://github.com/Android12349) | Фронтенд, тестирование |
-| Егор | [@b4wb0le1l0](https://github.com/b4wb0le1l0) | DevOps: CI/CD, стенд, мониторинг |
+| Егор | [@b4wb0le1l0](https://github.com/b4wb0le1l0) | DevOps: CI/CD, стенд, мониторинг; API сессий, солвер Timefold |
 | Паша | [@Paulsob](https://github.com/Paulsob) | Тимлид: связь с ментором, демонстрация |
 
 ## Как предложить изменение

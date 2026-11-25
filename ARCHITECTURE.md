@@ -42,7 +42,7 @@ flowchart BT
 | `experiments` | Консольная программа: сетка прогонов, CSV | солверы, `datagen` |
 | `app` | Spring Boot приложение | всё, кроме `experiments` |
 
-Модули заводятся по мере работ: на старте `domain-model`, `solver-greedy`, `datagen`, `app`.
+Модули заводятся по мере работ: сейчас есть `domain-model`, `solver-greedy`, `solver-cpsat`, `datagen` и `app`; `solver-timefold` и `experiments` появятся в спринтах 2–3.
 
 ### Две модели данных
 
@@ -71,7 +71,7 @@ flowchart BT
 ## Как идёт расчёт
 
 1. Организатор (или планировщик после закрытия сбора) создаёт задачу расчёта: сессия, версия входных данных, алгоритм, параметры.
-2. Задача попадает в очередь. Одновременно выполняются не больше N расчётов (по умолчанию 1–2): CP-SAT загружает все ядра, а стенд общий.
+2. Задача попадает в очередь. Одновременно выполняются не больше N расчётов (по умолчанию 1, переменная `SLOTWISE_SOLVING_MAX_CONCURRENT_JOBS`): CP-SAT загружает все ядра, а стенд общий. Очередь хранится в памяти приложения: задачи, не завершённые к перезапуску, помечаются ошибкой, и их запускают заново.
 3. Исполнитель собирает `Problem`, вызывает солвер и обновляет прогресс задачи. В MVP фронтенд опрашивает `GET /api/jobs/{id}`; SSE-поток — в спринте 3 ([D-15](DECISIONS.md#d-15)).
 4. Результат проверяется валидатором, сохраняется как черновой вариант с метриками и ссылкой на версию данных.
 5. Повторный запуск с теми же сессией, версией данных, алгоритмом и параметрами не создаёт новую задачу, а возвращает существующую.
@@ -108,7 +108,7 @@ flowchart BT
 | Метод и путь | Назначение | UX |
 | --- | --- | --- |
 | `POST /api/auth/login`, `POST /api/auth/logout`, `GET /api/auth/me` | Вход, выход, текущий пользователь | 01 |
-| `GET/POST/PATCH /api/admin/accounts` | Учётные записи, роли, пароли, отключение | 02, 03, 23 |
+| `GET/POST/PATCH /api/admin/accounts`, `PUT .../{id}/role`, `.../enabled`, `.../password` | Учётные записи, роли, пароли, отключение | 02, 03, 23 |
 | `POST /api/admin/import?dryRun=` | Импорт данных вуза: предпросмотр и применение | 04 |
 | `POST /api/admin/demo-data` | Генерация и импорт синтетических данных по профилю и seed | 04 |
 | `GET /api/university/{catalog}`, `GET /api/university/{catalog}/{id}` | Чтение справочников для ADMIN и ORGANIZER: people, groups, rooms, disciplines, equipment, teachings, supervisions, timetable. Для отдельной записи supervisions используется пара `{studentId}/{supervisorId}` | 06, 23 |
@@ -123,7 +123,7 @@ flowchart BT
 | `GET /api/solvers` | Доступные алгоритмы расчёта | 11 |
 | `POST /api/sessions/{id}/solve` | Запуск расчёта, возвращает задачу | 11 |
 | `GET /api/jobs/{id}`, `GET /api/jobs/{id}/events` | Статус и прогресс задачи; `/events` — SSE, спринт 3 | 11 |
-| `GET /api/variants/{id}` | Вариант: назначения, метрики, объяснения | 13 |
+| `GET /api/sessions/{id}/variants`, `GET /api/variants/{id}` | Варианты сессии; вариант с назначениями, метриками и объяснениями | 13 |
 | `GET /api/variants/{id}/assignments/{eventId}/candidates` | Допустимые пары «время начала и аудитория» при остальных фиксированных назначениях | 13 |
 | `PATCH /api/variants/{id}/assignments/{eventId}` | Ручная правка и фиксация | 14 |
 | `POST /api/variants/{id}/publish` | Публикация | 15 |
